@@ -19,7 +19,7 @@ public class Restaurant {
     }
 
     public String information(){
-        return name + " in " + address;
+        return name + " ln " + address;
     }
 
 
