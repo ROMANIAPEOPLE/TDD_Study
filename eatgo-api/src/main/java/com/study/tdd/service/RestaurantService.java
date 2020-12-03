@@ -6,8 +6,10 @@ import com.study.tdd.domain.Restaurant;
 import com.study.tdd.domain.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RestaurantService {
@@ -24,7 +26,7 @@ public class RestaurantService {
     }
 
     public Restaurant getRestaurantById(Long id){
-        Restaurant restaurant = restaurantRepository.findById(id);
+        Restaurant restaurant = restaurantRepository.findById(id).orElse(null);
         List<MenuItem> menuItems = menuItemRepository.findAllByRestaurantId(id);
         restaurant.setMenuItem(menuItems);
         return restaurant;
@@ -37,5 +39,19 @@ public class RestaurantService {
 
     public Restaurant addRestaurant(Restaurant restaurant) {
         return restaurantRepository.save(restaurant);
+    }
+
+    @Transactional
+    public Restaurant updateRestaurant(long id, String name, String address) {
+        //TODO :: 레스토랑 업데이트하기.
+
+        Restaurant restaurant = restaurantRepository.findById(id).orElse(null);
+
+        restaurant.updateInformation(name, address);
+//        restaurant.setName(name);
+//        restaurant.setAddress(address);
+        return restaurant;
+
+
     }
 }

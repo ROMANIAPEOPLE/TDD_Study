@@ -1,0 +1,16 @@
+{
+  "name": "web-api",
+  "version": "1.0.0",
+  "description": "EatGo web project",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "webpack-dev-server",
+    "test": "jest"
+  },
+  "author": "me",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack-cli": "^4.2.0",
+    "webpack-dev-server": "^3.11.0"
+  }
+}

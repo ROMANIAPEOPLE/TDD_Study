@@ -10,6 +10,7 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -48,7 +49,7 @@ class RestaurantServiceTest {
         restaurants.add(restaurant);
         given(restaurantRepository.findAll()).willReturn(restaurants);
 
-        given(restaurantRepository.findById(1004L)).willReturn(restaurant);
+        given(restaurantRepository.findById(1004L)).willReturn(Optional.of(restaurant));
     }
 
 
@@ -76,6 +77,18 @@ class RestaurantServiceTest {
         Restaurant created = restaurantService.addRestaurant(restaurant);
 
         assertThat(created.getId()).isEqualTo(1234L);
+
+    }
+
+    @Test
+    public void updateRestaurant() {
+        Restaurant restaurant= new Restaurant(1004L,"Bob zip", "Seoul");
+        given(restaurantRepository.findById(1004L)).willReturn(Optional.of(restaurant));
+        restaurantService.updateRestaurant(1004L,"Sool zip","Incheon");
+
+        assertThat(restaurant.getName()).isEqualTo("Sool zip");
+        assertThat(restaurant.getAddress()).isEqualTo("Incheon");
+
 
     }
 
